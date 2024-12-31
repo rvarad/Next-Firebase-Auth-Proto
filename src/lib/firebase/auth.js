@@ -46,14 +46,17 @@ async function signIn(email, password) {
 	}
 }
 
-async function signOut() {
+async function signOut(session) {
 	try {
 		await _signOut(firebaseClientAuth)
+
+		// console.log("session: ", session)
 
 		const response = await fetch("http://localhost:3000/api/v1/auth/signout", {
 			method: "POST",
 			headers: {
-				"Content-Type": "application/json",
+				Cookie: `session=${session.value}`,
+				// "Content-Type": "application/json",
 			},
 		})
 

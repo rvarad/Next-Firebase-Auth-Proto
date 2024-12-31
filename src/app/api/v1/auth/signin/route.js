@@ -15,12 +15,14 @@ async function POST(request) {
 		const sessionCookie = await createSessionCookie(idToken, {
 			expiresIn: expiry,
 		})
+
 		const options = {
 			name: "session",
 			value: sessionCookie,
 			maxAge: expiry,
 			httpOnly: true,
 			secure: true,
+			path: "/",
 		}
 
 		const cookieStore = await cookies()

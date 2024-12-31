@@ -3,11 +3,14 @@ import HomeContent from "../components/HomeContent"
 import { getCurrentUser } from "../lib/firebase/firebase-admin/user"
 import { signOut } from "../lib/firebase/auth"
 import { cookies } from "next/headers"
+import { getSession } from "../lib/firebase/firebase-admin/session"
 
 export default async function Page() {
 	const currentUser = await getCurrentUser()
 
 	// console.log("cookies: ", (await cookies()).get("session"))
+
+	// console.log("session: ", await getSession())
 
 	return (
 		<div className="h-screen w-screen flex flex-row items-center justify-evenly">
@@ -20,7 +23,10 @@ export default async function Page() {
 					<form
 						onSubmit={async () => {
 							"use server"
-							await signOut()
+							const cookieStore = await cookies()
+							// console.log("cookieStore: ", cookieStore)
+
+							await signOut(cookieStore.get("session"))
 						}}
 					>
 						<button>

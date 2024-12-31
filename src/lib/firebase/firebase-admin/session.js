@@ -27,11 +27,13 @@ async function getSession() {
 
 async function revokeSession(sessionCookie) {
 	try {
-		const verifiedToken = await firebaseAdminAuth.verifySessionCookie(
+		const verifiedSession = await firebaseAdminAuth.verifySessionCookie(
 			sessionCookie
 		)
 
-		return firebaseAdminAuth.revokeRefreshTokens(verifiedToken.uid)
+		if (!verifiedSession) return
+
+		return firebaseAdminAuth.revokeRefreshTokens(verifiedSession.sub)
 	} catch (error) {
 		console.error("Error revoking session cookie", error)
 		return error

@@ -39,3 +39,5 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+next-firebase-auth-proto-firebase-adminsdk-f7imd-7662b7e5cf.json

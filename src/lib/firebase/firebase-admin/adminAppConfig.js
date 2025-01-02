@@ -19,7 +19,9 @@ export const firebaseAdminApp =
 	getApps().length === 0
 		? initializeApp(
 				{
-					credential: cert(process.env.FIREBASE_ADMIN_SERVICE_ACCOUNT),
+					credential: cert(
+						JSON.parse(process.env.FIREBASE_ADMIN_SERVICE_ACCOUNT)
+					),
 				},
 				"firebase-admin-trial"
 		  )

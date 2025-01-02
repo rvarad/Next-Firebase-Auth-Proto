@@ -14,7 +14,12 @@ function ProfilePageContent({ currentUserEmail, handleSignOut }) {
 		<>
 			<p>Hi!</p>
 			<p>You are signed in as {currentUserEmail}</p>
-			<Link href={"/set-admin-access"}>Get admin access</Link>
+			<Link
+				href={"/set-admin-access"}
+				className="w-[120px] h-[60px] flex items-center justify-center border-2 border-white rounded-2xl text-center"
+			>
+				Get admin access
+			</Link>
 			<button onClick={signOut}>
 				<div className="w-[120px] h-[60px] flex items-center justify-center border-2 border-white rounded-2xl">
 					Sign out

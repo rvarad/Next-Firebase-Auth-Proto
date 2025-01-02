@@ -13,7 +13,9 @@ async function Page() {
 					redirect("/admin")
 				}}
 			>
-				<button>Get Admin Access</button>
+				<button className="w-[120px] h-[60px] flex items-center justify-center border-2 border-white rounded-2xl">
+					Get Admin Access
+				</button>
 			</form>
 		</div>
 	)

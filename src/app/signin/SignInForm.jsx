@@ -20,7 +20,7 @@ function SignInForm() {
 
 			console.log("signInResult", signInResult)
 
-			if (signInResult) router.push("/")
+			if (signInResult) router.push("/profile")
 		} catch (error) {
 			console.error("Error signing in with email and password", error)
 		}

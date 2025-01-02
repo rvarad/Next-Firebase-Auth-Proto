@@ -28,7 +28,7 @@ async function POST(request) {
 		const cookieStore = await cookies()
 		cookieStore.set(options)
 
-		console.log("cookies: ", (await cookies()).get("session"))
+		// console.log("cookies: ", (await cookies()).get("session"))
 
 		return new Response(
 			JSON.stringify({

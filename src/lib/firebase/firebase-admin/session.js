@@ -18,7 +18,14 @@ async function createSessionCookie(idToken, sessionCookieOptions) {
 
 async function getSession() {
 	try {
-		return (await cookies()).get("session").value
+		const cookieStore = await cookies()
+		const sessionCookie = cookieStore.get("session")
+
+		const verifiedSession = await firebaseAdminAuth.verifySessionCookie(
+			sessionCookie.value
+		)
+
+		return verifiedSession
 	} catch (error) {
 		console.error("Error getting session cookie", error)
 		return error

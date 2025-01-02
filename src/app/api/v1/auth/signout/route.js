@@ -11,6 +11,8 @@ async function POST(request) {
 
 	const session = cookieStore.get("session")
 
+	// console.log("session", session)
+
 	// const sessionHeader = request.headers.get("Cookie")
 	// if (sessionHeader.startsWith("Session ")) {
 	// 	const sessionCookie = sessionHeader.slice(8)
@@ -19,11 +21,13 @@ async function POST(request) {
 
 	// 		const cookieStore = await cookies()
 
-	// 		// cookieStore.set({ name: "session", value: "", maxAge: -1 })
 	try {
 		await revokeSession(session.value)
+		// cookieStore.set({ name: "session", value: "", maxAge: -1 })
 
-		cookieStore.delete("session")
+		// cookieStore.delete("session")
+
+		// console.log("session", session)
 
 		return new Response(
 			JSON.stringify({
@@ -31,6 +35,7 @@ async function POST(request) {
 			}),
 			{ status: 200 }
 		)
+		// return Response.redirect(new URL("/", request.url), 308)
 	} catch (error) {
 		console.log("Error signing out", error)
 

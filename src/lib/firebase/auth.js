@@ -4,14 +4,15 @@ import {
 	signOut as _signOut,
 } from "firebase/auth"
 import { firebaseClientAuth } from "./clientAppConfig"
+import { redirect } from "next/navigation"
+import { revalidatePath } from "next/cache"
+import { isRedirectError } from "next/dist/client/components/redirect-error"
 
 async function signUp(email, password) {
 	try {
-		return await createUserWithEmailAndPassword(
-			firebaseClientAuth,
-			email,
-			password
-		)
+		await createUserWithEmailAndPassword(firebaseClientAuth, email, password)
+
+		await _signOut(firebaseClientAuth)
 	} catch (error) {
 		console.log("Error signing up with email and password", error)
 	}
@@ -62,13 +63,14 @@ async function signOut(session) {
 
 		if (response.status === 200) {
 			console.log("Signed out")
-			return true
+			// redirect("/signin")
 		} else {
 			return false
 		}
 	} catch (error) {
 		console.error("Error signing out", error)
-		return false
+
+		if (isRedirectError(error)) throw error
 	}
 }
 

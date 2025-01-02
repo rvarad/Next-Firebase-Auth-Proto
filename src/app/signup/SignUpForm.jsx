@@ -16,9 +16,7 @@ function SignUpForm() {
 	const router = useRouter()
 
 	async function submitValues(data) {
-		const userCredentials = await signUp(data.email, data.password)
-
-		await signOut()
+		await signUp(data.email, data.password)
 
 		router.push("/signin")
 	}
